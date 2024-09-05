@@ -59,8 +59,8 @@ class UMLSDBConnection:
 def display_json_data(json_data):
     results = json_data['result']['results']
     df = pd.DataFrame(results)
-    st.dataframe(df)
-
+    st.dataframe(df[['name', 'ui', 'rootSource']])
+    
 def display_hierarchy_data(json_data):
     if json_data and "result" in json_data and json_data['result']:
         results = json_data['result']
@@ -84,6 +84,7 @@ def main():
             data = conn.query(search_term)
 
             if data:
+
                 display_json_data(data)
                 
                 if data['result']['results']:
